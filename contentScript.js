@@ -1,5 +1,7 @@
 function replaceProfilePics() {
+
     const profilePics = document.querySelectorAll('.feed-shared-actor__avatar-image, .feed-shared-actor__avatar-img');
+
 
     profilePics.forEach(pic => {
         if (pic.tagName === 'IMG') {
@@ -10,6 +12,10 @@ function replaceProfilePics() {
     });
 }
 
-replaceProfilePics();
 
-// MutationObserver not needed for Firefox
+replaceProfilePics();
+const feed = document.querySelector('.scaffold-finite-scroll__content');
+if (feed) {
+    const observer = new MutationObserver(replaceProfilePics);
+    observer.observe(feed, { childList: true, subtree: true });
+}
